@@ -26,6 +26,19 @@ $(function () {
         $("#courses-container").addClass("active");
     });
 
+    
+    var addCourseButton = $("#add-course-button");
+    var addForm = $("#add-course");
+    var cancelButton = $("#cancel-course");
+    //Pressing the "+" button shows or hides the form to add new course
+    addCourseButton.on("click",function(){
+        addForm.toggle();
+        //Pressing the grey cancel button will hide the form 
+        cancelButton.on("click",function(){
+            addForm.hide();
+        })
+    });
+
 
     // Dynamically populate html using objects created on web page loading
     function init() {
