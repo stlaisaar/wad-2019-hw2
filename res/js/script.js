@@ -34,15 +34,81 @@ $(function () {
     var addCourseButton = $("#add-course-button");
     var addForm = $("#add-course");
     var cancelButton = $("#cancel-course");
+    var saveButton = $("#save-course");
     //Pressing the "+" button shows or hides the form to add new course
-    addCourseButton.on("click",function(){
+    addCourseButton.click(function(){
         addForm.toggle();
-        //Pressing the grey cancel button will hide the form 
-        cancelButton.on("click",function(){
+        //Pressing the grey cancel button will hide the form
+        //and information will disappear
+        cancelButton.click(function(){
+            $('#title').val('');
+            $('#semester').val('');
+            $('#grade').val('');
+            addForm.hide();
+        });
+
+        //When clicking "Save" button, in the form, entered information should appear in the table and
+        //the GPA on "Profile" container needs to be updated as well (depending on the grade you enter)
+        //the form also needs to be reset (all the entered information cleared out) and hidden
+        saveButton.click(function(){
+            let title = $("#title").val();
+            let semester = $("#semester").val();
+            let grade = $("#grade").val();
+            $('#title').val('');
+            $('#semester').val('');
+            $('#grade').val('');
+
+            courses.push(new Course(title, semester, grade));
+
+            let table_row = $("<tr></tr>");
+            let course_id = $("<td></td>");
+            let course_name = $("<td></td>");
+            let course_semester = $("<td></td>");
+            let course_grade = $("<td></td>");
+            course_id.text(courses.length);
+            course_name.text(title);
+            course_semester.text(semester);
+            course_grade.text(grade);
+            table_row.append(course_id);
+            table_row.append(course_name);
+            table_row.append(course_semester);
+            table_row.append(course_grade);
+            $("#courses tbody").append(table_row);
+
+            $('#gpa strong').text(calculateGPA());
+
+            $(this).off('click');
             addForm.hide();
         })
     });
 
+    function calculateGPA(){
+        let sum = 0;
+        for (let i = 0; i < courses.length; i++) {
+            let point = 0;
+            if(courses[i].grade > 90){
+                point = 4;
+            }
+            else if(courses[i].grade > 80){
+                point = 3
+            }
+            else if(courses[i].grade > 70){
+                point = 2
+            }
+            else if(courses[i].grade > 60){
+                point = 1
+            }
+            else if(courses[i].grade > 50){
+                point = 0.5
+            }
+            else if(courses[i].grade <= 50){
+                continue;
+            }
+            sum = sum + point;
+        }
+
+        return (Math.round(((sum)/courses.length) * 100)/100).toFixed(2);
+    }
 
     // Dynamically populate html using objects created on web page loading
     function init() {
