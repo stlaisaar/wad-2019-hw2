@@ -16,6 +16,8 @@ $(function () {
     var profileButton = $("#profile-button");
     profileButton.click(function (event) {
         $("#courses-container").removeClass("active");
+        $("#courses-button").removeClass("active");
+        $(event.target).addClass("active");
         $("#profile-container").addClass("active");
     });
 
@@ -23,6 +25,8 @@ $(function () {
     var coursesButton = $("#courses-button");
     coursesButton.click(function (event) {
         $("#profile-container").removeClass("active");
+        $("#profile-button").removeClass("active");
+        $(event.target).addClass("active");
         $("#courses-container").addClass("active");
     });
 
