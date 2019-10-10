@@ -1,4 +1,3 @@
-// USE jQuery !!!
 class User {
     constructor(firstname, lastname, birthdate, faculty) {
         this.firstname = firstname;

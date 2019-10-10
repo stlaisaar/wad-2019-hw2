@@ -1,4 +1,3 @@
-// USE jQuery !!!
 class Course {
     constructor(title, semester, grade) {
         this.title = title;
