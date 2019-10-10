@@ -144,6 +144,10 @@ table td{
     border: none;
     padding: 10px 20px;
 }
+
+.blue-button:hover{
+    cursor:pointer;
+}
 .green-button{
     background-color: #69f378;
     color: #ffffff;
@@ -155,6 +159,10 @@ table td{
     color: #ffffff;
     border: none;
     padding: 10px 20px;
+}
+
+.grey-button:hover{
+    cursor:pointer;
 }
 .input{
     border: 1px solid #cccccc;
